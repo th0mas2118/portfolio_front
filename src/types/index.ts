@@ -16,6 +16,12 @@ export interface ContactForm {
   message: string
 }
 
+export interface ContactFormStatus {
+  loading: boolean
+  success: boolean
+  error: string | null
+}
+
 export interface ApiEndpoint {
   id: number
   name: string
