@@ -14,10 +14,37 @@
           <li>• Gestion des headers personnalisés</li>
         </ul>
       </div>
+      <button @click="sendApiRequest">Test API</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// API Demo component - À développer plus tard
+import { ApiResponse, ApiEndpoint } from '@/types';
+import { ref, reactive } from 'vue'
+import axios from 'axios';
+
+const apiUrl = 'http://localhost:8000/api'
+
+const endpoint = ref<ApiEndpoint>({
+  id: 1,
+  name: 'Test',
+  method: 'GET',
+  path: '/profile/basic',
+  description: 'Test de l\'API'
+})
+
+const sendApiRequest = async(): Promise<ApiResponse> => {
+  const response: ApiResponse = await axios.request({
+    method: endpoint.value.method,
+    url: apiUrl + endpoint.value.path,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  console.log(response)
+
+  return response
+}
 </script>
