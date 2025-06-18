@@ -28,6 +28,18 @@ export interface ApiEndpoint {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE'
   path: string
   description: string
+  category: string
+  requiresAuth?: boolean
+  parameters?: ApiParameter[]
+  exampleResponse?: any
+}
+
+export interface ApiParameter {
+  name: string
+  type: 'string' | 'number' | 'boolean' | 'object'
+  required: boolean
+  description: string
+  defaultValue?: any
 }
 
 export interface ApiResponse {
@@ -36,9 +48,35 @@ export interface ApiResponse {
   headers: Record<string, string>
   data: any
   duration: number
+  timestamp: string
+  size: number
 }
 
 export interface CustomHeader {
   key: string
   value: string
+}
+
+export interface RequestHistory {
+  id: string
+  endpoint: ApiEndpoint
+  response: ApiResponse
+  timestamp: string
+  duration: number
+}
+
+export interface ApiCategory {
+  id: string
+  name: string
+  description: string
+  icon: string
+  endpoints: ApiEndpoint[]
+}
+
+export interface ApiStats {
+  totalRequests: number
+  successfulRequests: number
+  failedRequests: number
+  averageResponseTime: number
+  popularEndpoints: { path: string; count: number }[]
 }

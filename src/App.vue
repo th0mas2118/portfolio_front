@@ -38,9 +38,12 @@
         <p>&copy; 2025 Portfolio - Développeur Full Stack</p>
       </div>
     </footer>
+
+    <!-- Toast Notifications -->
+    <Toast />
   </div>
 </template>
 
 <script setup lang="ts">
-// App component
+import Toast from './components/Toast.vue'
 </script>
