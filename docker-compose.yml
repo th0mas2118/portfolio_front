@@ -1,0 +1,16 @@
+services:
+  vue:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE:-Dockerfile.dev}
+    container_name: portfolio_vue
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    tty: true
+    stdin_open: true
+    environment:
+      - VITE_API_URL=http://localhost:8000/api

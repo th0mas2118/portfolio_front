@@ -1,0 +1,9 @@
+FROM oven/bun:1.0-alpine
+
+WORKDIR /app
+
+# Exposer le port de développement Vite
+EXPOSE 5173
+
+# Commande par défaut pour le développement
+CMD ["sh"]
