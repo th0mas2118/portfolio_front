@@ -135,9 +135,8 @@ interface Props {
   selectedEndpoint?: ApiEndpoint | null
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  selectedEndpoint: null
-})
+// Pas besoin de stocker props si on ne l'utilise pas
+defineProps<Props>()
 
 // Emits
 const emit = defineEmits<{
@@ -204,16 +203,17 @@ const getMethodColor = (method: string) => {
   }
 }
 
-const toggleFavorite = (endpoint: ApiEndpoint) => {
-  const index = favoriteEndpoints.value.findIndex(fav => fav.id === endpoint.id)
-  if (index >= 0) {
-    favoriteEndpoints.value.splice(index, 1)
-  } else {
-    favoriteEndpoints.value.push(endpoint)
-  }
-  // Sauvegarder en localStorage
-  localStorage.setItem('api-favorites', JSON.stringify(favoriteEndpoints.value))
-}
+// Fonction pour gérer les favoris (non utilisée actuellement)
+// const toggleFavorite = (endpoint: ApiEndpoint) => {
+//   const index = favoriteEndpoints.value.findIndex(fav => fav.id === endpoint.id)
+//   if (index >= 0) {
+//     favoriteEndpoints.value.splice(index, 1)
+//   } else {
+//     favoriteEndpoints.value.push(endpoint)
+//   }
+//   // Sauvegarder en localStorage
+//   localStorage.setItem('api-favorites', JSON.stringify(favoriteEndpoints.value))
+// }
 
 const loadFavorites = () => {
   try {

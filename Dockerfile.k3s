@@ -9,6 +9,10 @@ RUN bun install
 # Copier le code source
 COPY . .
 
+# Définir les variables d'environnement pour le build
+ENV VITE_API_URL=https://api.portfolio.tpierson.fr/api
+ENV NODE_ENV=production
+
 # Build de production
 RUN bun run build
 
