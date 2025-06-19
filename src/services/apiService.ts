@@ -5,8 +5,8 @@ class ApiService {
   private baseURL: string
   private requestCount: number = 0
 
-  constructor(baseURL: string = 'http://localhost:8000/api') {
-    this.baseURL = baseURL
+  constructor(baseURL?: string) {
+    this.baseURL = baseURL || import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
   }
 
   async makeRequest(
@@ -43,7 +43,7 @@ class ApiService {
       return {
         status: response.status,
         statusText: response.statusText,
-        headers: response.headers,
+        headers: response.headers as Record<string, string>,
         data: response.data,
         duration: Math.round(duration),
         timestamp: new Date().toISOString(),
@@ -58,7 +58,7 @@ class ApiService {
       return {
         status: errorResponse.status || 0,
         statusText: errorResponse.statusText || 'Network Error',
-        headers: errorResponse.headers || {},
+        headers: (errorResponse.headers || {}) as Record<string, string>,
         data: errorResponse.data || { error: error.message },
         duration: Math.round(duration),
         timestamp: new Date().toISOString(),
